@@ -4,7 +4,7 @@
  *
  * @link https://woocommerce.com/
  *
- * @package _s
+ * @package Megatherium_is_Awesome
  */
 
 /**
@@ -16,7 +16,7 @@
  *
  * @return void
  */
-function _s_woocommerce_setup() {
+function megatherium_is_awesome_woocommerce_setup() {
 	add_theme_support(
 		'woocommerce',
 		array(
@@ -35,15 +35,15 @@ function _s_woocommerce_setup() {
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
 }
-add_action( 'after_setup_theme', '_s_woocommerce_setup' );
+add_action( 'after_setup_theme', 'megatherium_is_awesome_woocommerce_setup' );
 
 /**
  * WooCommerce specific scripts & stylesheets.
  *
  * @return void
  */
-function _s_woocommerce_scripts() {
-	wp_enqueue_style( '_s-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array(), _S_VERSION );
+function megatherium_is_awesome_woocommerce_scripts() {
+	wp_enqueue_style( 'megatherium-is-awesome-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array(), megatherium_is_awesome_VERSION );
 
 	$font_path   = WC()->plugin_url() . '/assets/fonts/';
 	$inline_font = '@font-face {
@@ -57,9 +57,9 @@ function _s_woocommerce_scripts() {
 			font-style: normal;
 		}';
 
-	wp_add_inline_style( '_s-woocommerce-style', $inline_font );
+	wp_add_inline_style( 'megatherium-is-awesome-woocommerce-style', $inline_font );
 }
-add_action( 'wp_enqueue_scripts', '_s_woocommerce_scripts' );
+add_action( 'wp_enqueue_scripts', 'megatherium_is_awesome_woocommerce_scripts' );
 
 /**
  * Disable the default WooCommerce stylesheet.
@@ -77,12 +77,12 @@ add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
  * @param  array $classes CSS classes applied to the body tag.
  * @return array $classes modified to include 'woocommerce-active' class.
  */
-function _s_woocommerce_active_body_class( $classes ) {
+function megatherium_is_awesome_woocommerce_active_body_class( $classes ) {
 	$classes[] = 'woocommerce-active';
 
 	return $classes;
 }
-add_filter( 'body_class', '_s_woocommerce_active_body_class' );
+add_filter( 'body_class', 'megatherium_is_awesome_woocommerce_active_body_class' );
 
 /**
  * Related Products Args.
@@ -90,7 +90,7 @@ add_filter( 'body_class', '_s_woocommerce_active_body_class' );
  * @param array $args related products args.
  * @return array $args related products args.
  */
-function _s_woocommerce_related_products_args( $args ) {
+function megatherium_is_awesome_woocommerce_related_products_args( $args ) {
 	$defaults = array(
 		'posts_per_page' => 3,
 		'columns'        => 3,
@@ -100,7 +100,7 @@ function _s_woocommerce_related_products_args( $args ) {
 
 	return $args;
 }
-add_filter( 'woocommerce_output_related_products_args', '_s_woocommerce_related_products_args' );
+add_filter( 'woocommerce_output_related_products_args', 'megatherium_is_awesome_woocommerce_related_products_args' );
 
 /**
  * Remove default WooCommerce wrapper.
@@ -108,7 +108,7 @@ add_filter( 'woocommerce_output_related_products_args', '_s_woocommerce_related_
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 
-if ( ! function_exists( '_s_woocommerce_wrapper_before' ) ) {
+if ( ! function_exists( 'megatherium_is_awesome_woocommerce_wrapper_before' ) ) {
 	/**
 	 * Before Content.
 	 *
@@ -116,15 +116,15 @@ if ( ! function_exists( '_s_woocommerce_wrapper_before' ) ) {
 	 *
 	 * @return void
 	 */
-	function _s_woocommerce_wrapper_before() {
+	function megatherium_is_awesome_woocommerce_wrapper_before() {
 		?>
 			<main id="primary" class="site-main">
 		<?php
 	}
 }
-add_action( 'woocommerce_before_main_content', '_s_woocommerce_wrapper_before' );
+add_action( 'woocommerce_before_main_content', 'megatherium_is_awesome_woocommerce_wrapper_before' );
 
-if ( ! function_exists( '_s_woocommerce_wrapper_after' ) ) {
+if ( ! function_exists( 'megatherium_is_awesome_woocommerce_wrapper_after' ) ) {
 	/**
 	 * After Content.
 	 *
@@ -132,13 +132,13 @@ if ( ! function_exists( '_s_woocommerce_wrapper_after' ) ) {
 	 *
 	 * @return void
 	 */
-	function _s_woocommerce_wrapper_after() {
+	function megatherium_is_awesome_woocommerce_wrapper_after() {
 		?>
 			</main><!-- #main -->
 		<?php
 	}
 }
-add_action( 'woocommerce_after_main_content', '_s_woocommerce_wrapper_after' );
+add_action( 'woocommerce_after_main_content', 'megatherium_is_awesome_woocommerce_wrapper_after' );
 
 /**
  * Sample implementation of the WooCommerce Mini Cart.
@@ -146,13 +146,13 @@ add_action( 'woocommerce_after_main_content', '_s_woocommerce_wrapper_after' );
  * You can add the WooCommerce Mini Cart to header.php like so ...
  *
 	<?php
-		if ( function_exists( '_s_woocommerce_header_cart' ) ) {
-			_s_woocommerce_header_cart();
+		if ( function_exists( 'megatherium_is_awesome_woocommerce_header_cart' ) ) {
+			megatherium_is_awesome_woocommerce_header_cart();
 		}
 	?>
  */
 
-if ( ! function_exists( '_s_woocommerce_cart_link_fragment' ) ) {
+if ( ! function_exists( 'megatherium_is_awesome_woocommerce_cart_link_fragment' ) ) {
 	/**
 	 * Cart Fragments.
 	 *
@@ -161,17 +161,17 @@ if ( ! function_exists( '_s_woocommerce_cart_link_fragment' ) ) {
 	 * @param array $fragments Fragments to refresh via AJAX.
 	 * @return array Fragments to refresh via AJAX.
 	 */
-	function _s_woocommerce_cart_link_fragment( $fragments ) {
+	function megatherium_is_awesome_woocommerce_cart_link_fragment( $fragments ) {
 		ob_start();
-		_s_woocommerce_cart_link();
+		megatherium_is_awesome_woocommerce_cart_link();
 		$fragments['a.cart-contents'] = ob_get_clean();
 
 		return $fragments;
 	}
 }
-add_filter( 'woocommerce_add_to_cart_fragments', '_s_woocommerce_cart_link_fragment' );
+add_filter( 'woocommerce_add_to_cart_fragments', 'megatherium_is_awesome_woocommerce_cart_link_fragment' );
 
-if ( ! function_exists( '_s_woocommerce_cart_link' ) ) {
+if ( ! function_exists( 'megatherium_is_awesome_woocommerce_cart_link' ) ) {
 	/**
 	 * Cart Link.
 	 *
@@ -179,13 +179,13 @@ if ( ! function_exists( '_s_woocommerce_cart_link' ) ) {
 	 *
 	 * @return void
 	 */
-	function _s_woocommerce_cart_link() {
+	function megatherium_is_awesome_woocommerce_cart_link() {
 		?>
-		<a class="cart-contents" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', '_s' ); ?>">
+		<a class="cart-contents" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'megatherium-is-awesome' ); ?>">
 			<?php
 			$item_count_text = sprintf(
 				/* translators: number of items in the mini cart. */
-				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), '_s' ),
+				_n( '%d item', '%d items', WC()->cart->get_cart_contents_count(), 'megatherium-is-awesome' ),
 				WC()->cart->get_cart_contents_count()
 			);
 			?>
@@ -195,13 +195,13 @@ if ( ! function_exists( '_s_woocommerce_cart_link' ) ) {
 	}
 }
 
-if ( ! function_exists( '_s_woocommerce_header_cart' ) ) {
+if ( ! function_exists( 'megatherium_is_awesome_woocommerce_header_cart' ) ) {
 	/**
 	 * Display Header Cart.
 	 *
 	 * @return void
 	 */
-	function _s_woocommerce_header_cart() {
+	function megatherium_is_awesome_woocommerce_header_cart() {
 		if ( is_cart() ) {
 			$class = 'current-menu-item';
 		} else {
@@ -210,7 +210,7 @@ if ( ! function_exists( '_s_woocommerce_header_cart' ) ) {
 		?>
 		<ul id="site-header-cart" class="site-header-cart">
 			<li class="<?php echo esc_attr( $class ); ?>">
-				<?php _s_woocommerce_cart_link(); ?>
+				<?php megatherium_is_awesome_woocommerce_cart_link(); ?>
 			</li>
 			<li>
 				<?php
